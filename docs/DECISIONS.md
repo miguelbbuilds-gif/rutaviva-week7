@@ -171,6 +171,12 @@ Miguel approved the Week 7 pre-code packet and locked:
 | A11 | Mockup file specified at `docs/mockups/rutaviva-loop-frame.png` |
 | A12 | **Yes** — close ≠ safe; wording unchanged |
 
-### First implementation step (authorized)
+---
 
-Scaffold Vite + React + TypeScript at repo root, then map, driver form, coordinator loop, and in-browser ML in separate commits.
+## 2026-09-27 — Implementation started (post-approval)
+
+- Repo root Vite + React + TypeScript SPA authorized and scaffolded.
+- Corridor IDs in code: `DEMO-TO1`.
+- First local URL observed: Vite moved to **http://localhost:5174/** because 5173 was already in use.
+- Mockup embed path: `docs/mockups/rutaviva-loop-frame.png` (file was not present in the workspace at implementation time).
+- Vercel production URL: not created in this step.
