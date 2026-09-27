@@ -231,5 +231,7 @@ Screenshot-based persona pass (Don José). **No live interview.** Main issue: te
 
 Shipped compact Spanish fallback + optional “Por qué no hay sugerencia” explanation. Recent list is behind that disclosure and labeled as not IA / not a verification.
 
-* Git commit: *(after commit)*
-* Vercel: *(after deploy)*
+* Git commit: `25c3326` — `fix: replace technical ML fallback with plain Spanish for coordinators`
+* Vercel (READY): https://rutaviva-week7-jtsugtk3h-miguel-d52d.vercel.app
+* Alias: https://rutaviva-week7.vercel.app
+* Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/msxFja9QWWdXv8mmgcf9bxqmJgqN

@@ -89,4 +89,6 @@ Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/2Dk4ctYGZLTCs3Smoxf7zX253
 | `npm run build` | Pass (exit 0) |
 | Playwright 390×667 vs http://127.0.0.1:4175/ | Pass: new copy present; old “ML no disponible” chip absent; details 44px tall, width 301px; assign + Luis outcome + persist still pass |
 
-* Git commit / Vercel URL: see DECISIONS after deploy.
+* Git commit: `25c3326`
+* Vercel: https://rutaviva-week7-jtsugtk3h-miguel-d52d.vercel.app
+* Alias: https://rutaviva-week7.vercel.app
