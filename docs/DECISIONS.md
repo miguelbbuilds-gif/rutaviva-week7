@@ -180,3 +180,15 @@ Miguel approved the Week 7 pre-code packet and locked:
 - First local URL observed: Vite moved to **http://localhost:5174/** because 5173 was already in use.
 - Mockup embed path: `docs/mockups/rutaviva-loop-frame.png` (file was not present in the workspace at implementation time).
 - Vercel production URL: not created in this step.
+
+---
+
+## 2026-09-27 — First public deployment baseline (prep)
+
+Preserve this build as the first public baseline. No mechanical bug-fix pass and no persona testing in this step.
+
+* **Build:** `npm run build` (`tsc -b && vite build`) completed with **exit 0**. Vite 6.4.3; vendor warning from `onnxruntime-web` eval; Transformers chunk ~828 kB.
+* **Git:** branch `master`, working tree clean before this note. Six commits on disk (five implementation/docs commits plus this deploy-prep note after it is committed). History was not rewritten.
+* **Tracked files:** source, docs, Vite config, `vercel.json`, lockfile. Not tracked: `node_modules`, `dist`, `.env`. No API keys or real personal data in the tree. Demo names only (Luis Ortega, Ana Beltrán).
+* **Packet:** `docs/PACKET.md` embeds `mockups/rutaviva-loop-frame.png` and contains both Mermaid diagrams (report-to-action flowchart; DRIVER / SYSTEM-ML / COORDINATOR swimlane). **The PNG file is still missing from the workspace** (embed is present; binary is not).
+* **Next step:** create public GitHub repo `rutaviva-week7`, push `master`, then deploy that repo to Vercel Hobby. Record the real GitHub and Vercel URLs only after they exist. Do not start bug-fix or persona tests until this baseline is live.
