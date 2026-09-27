@@ -192,3 +192,16 @@ Preserve this build as the first public baseline. No mechanical bug-fix pass and
 * **Tracked files:** source, docs, Vite config, `vercel.json`, lockfile. Not tracked: `node_modules`, `dist`, `.env`. No API keys or real personal data in the tree. Demo names only (Luis Ortega, Ana Beltrán).
 * **Packet:** `docs/PACKET.md` embeds `mockups/rutaviva-loop-frame.png` and contains both Mermaid diagrams (report-to-action flowchart; DRIVER / SYSTEM-ML / COORDINATOR swimlane). **The PNG file is still missing from the workspace** (embed is present; binary is not).
 * **Next step:** create public GitHub repo `rutaviva-week7`, push `master`, then deploy that repo to Vercel Hobby. Record the real GitHub and Vercel URLs only after they exist. Do not start bug-fix or persona tests until this baseline is live.
+
+---
+
+## 2026-09-27 — First public URLs (baseline live)
+
+Recorded after a successful Vercel production build (`readyState: READY`, alias HTTP 200). GitHub repo connected. Do **not** start mechanical bug-fix or persona tests against this baseline yet.
+
+* GitHub: https://github.com/miguelbbuilds-gif/rutaviva-week7
+* Vercel production alias: https://rutaviva-week7.vercel.app
+* This deployment: https://rutaviva-week7-6z4da9hb8-miguel-d52d.vercel.app
+* Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/D8DDVk4zsLFVr2FHJp9hHXGquYCy
+
+**Next step (later):** mechanical tests and persona tests against this baseline, then a second Vercel deploy if fixes are needed.
