@@ -205,3 +205,16 @@ Recorded after a successful Vercel production build (`readyState: READY`, alias 
 * Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/D8DDVk4zsLFVr2FHJp9hHXGquYCy
 
 **Next step (later):** mechanical tests and persona tests against this baseline, then a second Vercel deploy if fixes are needed.
+
+---
+
+## 2026-09-27 — Mechanical test and nav-overlay fix
+
+Mechanical Playwright pass against the **baseline** alias https://rutaviva-week7.vercel.app (see `docs/TEST_EVIDENCE.md`). Confirmed bug **NAV-OVERLAY-1**: sticky tab bar covered the driver map (~62px) at 390×667.
+
+Fix is in `src/index.css` and `src/CorridorMap.tsx`. Local preview retest on http://127.0.0.1:4174/ showed no overlap and persistence after reload.
+
+Persona tests: not started.
+
+* Git commit (fix): *(filled after commit)*
+* Vercel redeploy: *(filled after production deploy)*

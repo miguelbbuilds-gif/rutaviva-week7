@@ -1,23 +1,62 @@
 # Test evidence
 
-Only procedures that were actually executed are listed. Persona scripts (P1–P5) were **not** run interactively: the Cursor browser MCP did not attach (`Server not found: cursor-ide-browser`). No Vercel URL was created.
+Checks below were actually executed. Persona tests (P1–P5) have **not** been run.
 
-| Date (UTC) | Check | Result | Notes |
-|------------|--------|--------|-------|
-| 2026-09-27 | `npm install` | Pass | Completed with exit 0. npm reported 5 audit vulnerabilities; `npm audit fix --force` was **not** run. |
-| 2026-09-27 | `npm run build` (`tsc -b && vite build`) | Pass | Exit 0. Vite 6.4.3 production build succeeded in ~2.7s. Transformers chunk ~828 kB (expected). onnxruntime-web eval warning from the vendor bundle. |
-| 2026-09-27 | `npm run dev` | Pass | Vite ready. Port **5173 in use**, so this app’s URL is **http://localhost:5174/**. |
-| 2026-09-27 | HTTP GET `http://localhost:5174/` | Pass | Status 200. HTML `lang="es-MX"`, title RutaViva DEMO, mounts `/src/main.tsx`. |
-| 2026-09-27 | Headless Edge `--dump-dom` on `http://localhost:5174/` | Pass (landing only) | Rendered Spanish landing: DEMO banner, Luis Ortega / Ana Beltrán, corredor DEMO-TO1 Tacubaya–Observatorio, not-a-ride-hailing copy, no driver score. Leaflet CSS injected. **Did not click** role buttons, map, forms, or ML. |
-| 2026-09-27 | Mechanical M1–M13 (full click-through) | Not run | Requires an interactive browser session. |
-| 2026-09-27 | ML model download / similarity scores | Not run | Model loads only after entering coordinator view; not opened in this evidence pass. |
-| 2026-09-27 | Voice / Web Speech | Not run | Headless dump-dom cannot exercise the mic. Typed fallback exists in code; not click-tested. |
-| 2026-09-27 | Mockup file `docs/mockups/rutaviva-loop-frame.png` | Missing in workspace | PACKET embeds the path; the PNG was not on disk when this folder was listed. |
-| 2026-09-27 | Git commits | Pass | Five commits on `master` (see `git log`). No deploy. |
+## Earlier local smoke (2026-09-27, pre-Vercel)
 
-## Copy spotted on the landing (dump-dom)
+| Check | Result | Notes |
+|-------|--------|-------|
+| `npm install` | Pass | Exit 0 |
+| `npm run build` | Pass | Exit 0; onnxruntime-web eval warning; Transformers chunk ~828 kB |
+| `npm run dev` | Pass | App at http://localhost:5174/ (5173 was SigueMX) |
+| Mockup PNG | Later recovered | See commit `ec0ec1d` |
 
-- `DEMO / DATOS SIMULADOS — No es seguimiento en vivo · No certifica seguridad`
-- `DEMO / SIMULATED DATA`
-- `No es una app para pedir viaje`
-- Invented identities named on screen
+## Mechanical test on production baseline
+
+**URL:** https://rutaviva-week7.vercel.app  
+**Method:** Playwright Chromium, viewport **390×667**. Date: 2026-09-27.
+
+| Step | Result | Evidence |
+|------|--------|----------|
+| Landing | Pass | Heading RutaViva, Luis/Ana entry |
+| Enter Luis Ortega | Pass | Header “Luis Ortega · Ruta DEMO-TO1…” |
+| Post-trip gate | Pass | Form locked until “Marcar viaje terminado” |
+| Empty submit validation | Pass | Error: `Toca el mapa para marcar el lugar (DEMO).` |
+| Voice | Pass as fallback path | Button labeled `Dictar (opcional)` (SpeechRecognition present in Chromium). Description was filled by **typed** text, not dictation. |
+| Map pin after scrolling map into view | Pass | `Ubicación: 19.40136, -99.19498` |
+| Submit report | Pass | Flash `Reporte RV-105 recibido. No hay puntaje ni ranking.` History heading visible |
+| Map tab | Pass | Leaflet corridor visible |
+| Switch to Ana | Pass | Header Ana Beltrán |
+| ML | Pass **fallback** | After ~25s: `ML no disponible` + `Lista reciente (no es ML)` including RV-105. No keyword list labeled as ML. **No similarity scores on this run** (model did not load in this Chromium). |
+| Assign action + owner + deadline + note | Pass | Flash `Decisión humana guardada…` |
+| Switch back to Luis | Pass | `Acción asignada` visible. Action text present (strict-mode locator clash on “Bacheo puntual” was a **test script** issue, not missing copy). |
+| Refresh persistence on **this production run** | Not finished | Script threw before reload. Persistence **was** confirmed on the fixed preview origin (below). |
+
+### Phone layout bug (confirmed on production)
+
+**ID:** NAV-OVERLAY-1  
+
+**Reproduction (390×667, https://rutaviva-week7.vercel.app):**
+
+1. Enter as Luis Ortega.  
+2. Tap **Marcar viaje terminado**.  
+3. Scroll until the Leaflet map is in the viewport.  
+4. Measure map vs tab bar.
+
+**Expected:** Map, location line, and Enviar stay fully above the tab bar so a finger can tap the map and submit.
+
+**Actual:** Map box `{ x: 31.4, y: 428.1, w: 327.2, h: 240 }` so the map bottom is **y=668**. Tab bar `{ y: 606.5, h: 60.2 }`. About **62px of the map sits under the nav**. A Cursor browser screenshot of the same production URL also showed **Marcar viaje terminado** clipped by the tab bar on a short pane.
+
+**Cause:** `.nav { position: sticky; bottom: 0 }` painted over scrolling `.content` instead of sitting in normal flex layout below it.
+
+**Fix:** `.nav` is `position: relative; flex-shrink: 0`. `.content` uses `flex: 1; min-height: 0; overflow: auto` with normal padding (no fake footer spacer). Leaflet `invalidateSize()` after map ready.
+
+**Retest (fixed build, Vite preview http://127.0.0.1:4174/, same 390×667 script):**
+
+| Measure | Result |
+|---------|--------|
+| Map box | `{ y: 211.1, h: 240 }` → bottom **451**, nav **y=606** — **no overlap** |
+| Submit vs nav | submit bottom 563 < nav 606 — **no overlap** |
+| Full loop | Pass including assign, Luis outcome, **reload persistence** of “Acción: Bacheo puntual” |
+
+Production retest of the overlay is recorded after the Vercel redeploy (see DECISIONS).

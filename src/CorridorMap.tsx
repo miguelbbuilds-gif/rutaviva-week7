@@ -72,6 +72,10 @@ export function CorridorMap({
     layersRef.current = L.layerGroup().addTo(map);
     mapRef.current = map;
 
+    map.whenReady(() => {
+      window.setTimeout(() => map.invalidateSize(), 50);
+    });
+
     map.on("click", (e: L.LeafletMouseEvent) => {
       clickRef.current?.(e.latlng.lat, e.latlng.lng);
     });

@@ -83,7 +83,8 @@ button {
 
 .content {
   flex: 1;
-  padding: 0 1rem 5.5rem;
+  min-height: 0;
+  padding: 0 1rem 1rem;
   overflow: auto;
 }
 
@@ -193,13 +194,15 @@ textarea {
 }
 
 .nav {
-  position: sticky;
-  bottom: 0;
+  flex-shrink: 0;
+  position: relative;
+  bottom: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: #fffdf8;
   border-top: 1px solid var(--line);
   padding: 0.35rem 0.2rem calc(0.35rem + env(safe-area-inset-bottom));
+  z-index: 2;
 }
 
 .nav button {
