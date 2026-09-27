@@ -59,4 +59,15 @@ Checks below were actually executed. Persona tests (P1–P5) have **not** been r
 | Submit vs nav | submit bottom 563 < nav 606 — **no overlap** |
 | Full loop | Pass including assign, Luis outcome, **reload persistence** of “Acción: Bacheo puntual” |
 
-Production retest of the overlay is recorded after the Vercel redeploy (see DECISIONS).
+**Retest on production after redeploy** (https://rutaviva-week7.vercel.app, CSS `index-CZN58TsP.css`, 390×667):
+
+| Measure | Result |
+|---------|--------|
+| Map box | `{ y: 211.1, h: 240 }` → bottom **451**, nav **y=606** — **no overlap** |
+| Submit vs nav | submit y=518 h=45, nav y=606 — **no overlap** |
+| Loop + refresh | Pass (RV-105, assign, Luis sees action, persist after reload) |
+
+Fix commit: `bd8404f`  
+Production deployment: https://rutaviva-week7-6uzrtccnv-miguel-d52d.vercel.app  
+Alias: https://rutaviva-week7.vercel.app  
+Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/2Dk4ctYGZLTCs3Smoxf7zX253zjQ

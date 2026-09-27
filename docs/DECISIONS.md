@@ -216,5 +216,9 @@ Fix is in `src/index.css` and `src/CorridorMap.tsx`. Local preview retest on htt
 
 Persona tests: not started.
 
-* Git commit (fix): *(filled after commit)*
-* Vercel redeploy: *(filled after production deploy)*
+* Git commit (fix): `bd8404f` — `fix: keep the phone tab bar from covering the driver map`
+* Vercel redeploy (READY): https://rutaviva-week7-6uzrtccnv-miguel-d52d.vercel.app
+* Alias (HTTP 200, new CSS): https://rutaviva-week7.vercel.app
+* Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/2Dk4ctYGZLTCs3Smoxf7zX253zjQ
+
+Production overlay retest at 390×667: map bottom y=451 vs nav y=606 (no overlap). Persona tests still not started.
