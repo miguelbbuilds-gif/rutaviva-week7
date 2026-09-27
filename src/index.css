@@ -245,6 +245,30 @@ textarea {
   padding: 0.75rem;
 }
 
+.ml-box-compact p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.ml-details {
+  margin-top: 0.55rem;
+}
+
+.ml-details summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.ml-details .muted,
+.ml-details p {
+  margin: 0.45rem 0 0;
+}
+
 .error {
   color: #8c1d18;
   font-size: 0.88rem;

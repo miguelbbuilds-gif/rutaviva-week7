@@ -71,3 +71,22 @@ Fix commit: `bd8404f`
 Production deployment: https://rutaviva-week7-6uzrtccnv-miguel-d52d.vercel.app  
 Alias: https://rutaviva-week7.vercel.app  
 Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/2Dk4ctYGZLTCs3Smoxf7zX253zjQ
+
+---
+
+## 2026-09-27 — Synthetic persona (screenshots), ML fallback copy
+
+**Not a real driver interview.** Walkthrough of the live mobile UI using screenshots, persona **Don José** (56, colectivo driver, distrusts surveillance, wants a human action).
+
+**Finding:** The coordinator “ML no disponible” panel was large and technical (`embeddings`, `no es un filtro por palabras clave…`, a list that looked like a system result). It interrupted review and used language the persona would not trust or understand.
+
+**Fix:** Compact Spanish notice: “La sugerencia automática no está disponible. Puedes revisar los reportes y decidir normalmente.” Details control “Por qué no hay sugerencia” explains the model did not load and that any recent list is **not** an IA recommendation and **does not** verify a report. Human statuses, history, and DEMO labels unchanged.
+
+**Tests (this machine, not invented):**
+
+| Check | Result |
+|-------|--------|
+| `npm run build` | Pass (exit 0) |
+| Playwright 390×667 vs http://127.0.0.1:4175/ | Pass: new copy present; old “ML no disponible” chip absent; details 44px tall, width 301px; assign + Luis outcome + persist still pass |
+
+* Git commit / Vercel URL: see DECISIONS after deploy.

@@ -222,3 +222,14 @@ Persona tests: not started.
 * Inspect: https://vercel.com/miguel-d52d/rutaviva-week7/2Dk4ctYGZLTCs3Smoxf7zX253zjQ
 
 Production overlay retest at 390×667: map bottom y=451 vs nav y=606 (no overlap). Persona tests still not started.
+
+---
+
+## 2026-09-27 — Compact ML fallback (synthetic persona)
+
+Screenshot-based persona pass (Don José). **No live interview.** Main issue: technical “ML no disponible” panel.
+
+Shipped compact Spanish fallback + optional “Por qué no hay sugerencia” explanation. Recent list is behind that disclosure and labeled as not IA / not a verification.
+
+* Git commit: *(after commit)*
+* Vercel: *(after deploy)*

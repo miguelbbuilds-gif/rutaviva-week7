@@ -761,19 +761,27 @@ function MlPanel({
   if (ml.status === "unavailable") {
     const recent = [...reports].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 5);
     return (
-      <div className="ml-box">
-        <span className="chip stale">ML no disponible</span>
-        <p>{ml.reason} Esto no es un filtro por palabras clave presentado como ML.</p>
+      <div className="ml-box ml-box-compact">
         <p>
-          <strong>Lista reciente (no es ML):</strong>
+          La sugerencia automática no está disponible. Puedes revisar los reportes y decidir normalmente.
         </p>
-        <ul className="plain">
-          {recent.map((r) => (
-            <li key={r.id}>
-              {r.id} · {statusLabel(r.verificationStatus)}
-            </li>
-          ))}
-        </ul>
+        <details className="ml-details">
+          <summary>Por qué no hay sugerencia</summary>
+          <p className="muted">
+            El modelo automático no se pudo cargar. La lista siguiente es solo para consultar reportes
+            recientes. No es una recomendación de IA y no verifica ningún reporte. La decisión es tuya.
+          </p>
+          <p>
+            <strong>Reportes recientes para consultar (no es IA):</strong>
+          </p>
+          <ul className="plain">
+            {recent.map((r) => (
+              <li key={r.id}>
+                {r.id} · {statusLabel(r.verificationStatus)}
+              </li>
+            ))}
+          </ul>
+        </details>
       </div>
     );
   }
